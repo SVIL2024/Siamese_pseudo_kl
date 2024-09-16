@@ -1,5 +1,5 @@
 
-# Distance-augmented Deep Autoencoder with a Siamese Architecture for Video Anomaly Detection
+# Video Anomaly Detection using a Siamese Network with Pseudo Anomalies
 
 A brief description of what this project does and who it's for
 
