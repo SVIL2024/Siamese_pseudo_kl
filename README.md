@@ -1,7 +1,7 @@
 
-# Video Anomaly Detection using a Siamese Network with Pseudo Anomalies
+# Distance-augmented Deep Autoencoder with a Siamese Architecture for Video Anomaly Detection
 
-A brief description of what this project does and who it's for
+This paper is submited to The Visual Computer.
 
 
 ## Authors
@@ -13,12 +13,22 @@ Liang Zhang
 , Yan Cheng
 , Xi Luo
 , Xiaoru Liu
-Corresponding author: Shifeng Li limax 2008@outlook.com
+Corresponding author: Shifeng Li limax_2008@outlook.com
 ## Description
-This work introduces a novel method for detecting abnormal events in video sequences using a Siamese network. Traditional autoencoders (AEs) often face challenges in distinguishing between normal and abnormal samples, as they can effectively reconstruct both types. To address this issue, we propose integrating pseudo-anomalous samples into the Siamese network framework. Our method begins with a pseudo-anomaly synthesizer that creates synthetic anomalies from normal data. These normal and pseudo-anomalous samples are processed by a Siamese network comprising one encoder and two decoders, which are designed to reconstruct normal and pseudo-anomalous samples, respectively. The network is trained to maximize reconstruction loss for pseudo-anomalous samples while minimizing it for normal samples. Additionally, we introduce two loss functions—feature loss and output loss—that enhance the separation between normal and abnormal representations. These loss functions utilize $L_1$ distance and Kullback-Leibler Divergence (KLD) to distinguish between numerical values and data distributions. Experimental results on public datasets validate the effectiveness of our approach for video anomaly detection. 
+Video anomaly detection (VAD) the task of identifying anomalous events in video sequence, where anomalous events refer to unanticipated actions. Unanticipated actions rely on scene, what is unusual in one scene may be normal in another.This work introduces a new approach to recognize abnormal events in video sequences. Traditional auto-encoders (AEs) can reconstruct normal samples and abnormal samples well. To tackle this issue, we employ a pseudo anomaly synthesizer to generate synthetic anomalies from normal data and design two decoders to reconstruct normal and pseudo anomaly samples, respectively. We train the model to maximize the reconstruction loss on pseudo anomalies while minimizing it on normal data. To further distinguish between normal and abnormal representations, we implement L1 distance and Kullback-Leibler divergence (KLD) to enhance the distinction in numerical value and data distribution. Additionally, KLD is used to distinguish the outputs of two decoders.
 ## Training/Inference
-Train and evaluate the model.
+Train and evaluate the model in file "T3.py".
 
 ```bash
 python T3.py
 ```
+## Points
+
+#### Datasets
+To validate and benchmark our method against the state of the art, we conduct experiments on several diverse datasets:[ UCSD Ped2](http://www.svcl.ucsd.edu/projects/anomaly), [ CUHK Avenue](http://www.cse.cuhk.edu.hk/leojia/projects/detectabnormal/dataset.html), [ShanghaiTech](https://svip-lab.github.io/dataset/campus_dataset.html).
+
+#### Anomalies
+We simulate anomalous behavior by incorporating both motion and appearance information. The pseudo-anomalies in video sequences consist of two distinct phases: skip frames and adding noise. We limit the pseudo-anomaly data in the model by probability p. The skip frames is architected by "Reconstruction3DDataLoaderJump" in file "data.py" and noise is added by "gaussian" in file "utils.py".
+
+#### Feature loss
+We utilize the KLD loss and L1 loss capture capture the differences between normal and abnormal latent representations in terms of both value and distribution. They are used in training phase. These loss functions are "kl_fea" and "loss_feas" in file "T3.py".
