@@ -30,5 +30,5 @@ To validate and benchmark our method against the state of the art, we conduct ex
 #### Anomalies
 We simulate anomalous behavior by incorporating both motion and appearance information. The pseudo-anomalies in video sequences consist of two distinct phases: skip frames and adding noise. We limit the pseudo-anomaly data in the model by probability p. The skip frames is architected by "Reconstruction3DDataLoaderJump" in file "data.py" and noise is added by "gaussian" in file "utils.py".
 
-#### Feature loss
-We utilize the KLD loss and L1 loss capture capture the differences between normal and abnormal latent representations in terms of both value and distribution. They are used in training phase. These loss functions are "kl_fea" and "loss_feas" in file "T3.py".
+#### Our loss for siamese architected model
+The loss for siamese architected model include feature loss and output loss. We utilize the KLD loss and L1 loss capture capture the differences between normal and abnormal latent representations in terms of both value and distribution. Only L1 loss is implemented to increase the distance of normal and abnormal reconstructed outputs. They are used in training phase. These loss functions are "kl_fea" and "loss_feas" in file "T3.py".
